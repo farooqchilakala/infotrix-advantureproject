@@ -24,7 +24,7 @@ public class Scenario {
     
     private void explore() {
         System.out.println("\nYou decide to explore the jungle.");
-        int randomEvent = (int) (Math.random() * 6) + 1;
+        int randomEvent = (int) (Math.random() * 7) + 1;
         
         if (randomEvent == 1) {
             System.out.println("You encounter a river.");
@@ -116,14 +116,38 @@ public class Scenario {
             System.out.println("Invalid choice. Please try again.");
             explore();
         }
-    }
+    }else if (randomEvent == 7) {
+            System.out.println("You saw a lion. there is no way to run!");
+            System.out.println("What do you want to do? (1) Attack with your knife.  (2) Hide Yourself and wait.");
+            String choice = Game.getPlayerInput();
+
+            if (choice.equals("1")) {
+                System.out.println("You attacked and killed the lion But you are very injured.");
+                System.out.println("Your health is decreased by 70%");
+                player.decreaseHealth(70);
+                System.out.println("Health : " + player.getHealth());
+            } else if (choice.equals("2")) {
+                System.out.println("you failed, lion attacked you. You died.");
+                player.decreaseHealth(100);
+                System.out.println("Health : " + player.getHealth());
+            } else {
+                System.out.println("Invalid choice. Please try again.");
+                explore();
+            }
+        }
 
     }
     
     private void rest() {
         System.out.println("You decide to rest and regain your strength.");
-        player.increaseHealth(20);
-        System.out.println("Health :"+ player.getHealth());
-        System.out.println("You feel refreshed and ready to continue your journey.");
+        int randomEvent = (int) (Math.random() * 2) + 1;
+        if(randomEvent==1){
+            player.increaseHealth(20);
+            System.out.println("Health :"+ player.getHealth());
+            System.out.println("You feel refreshed and ready to continue your journey.");
+        }else if(randomEvent==2){
+            System.out.println("You are not able to rest right now.");
+        }
+
     }
 }
